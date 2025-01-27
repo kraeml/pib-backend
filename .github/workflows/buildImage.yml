@@ -1,17 +1,19 @@
 name: Build Pib image on RaspianOS
-
 on:
-        push:
+  push:
 
 jobs:
-        build:
-                - name: Checkout CustomPiOS
-                  uses: actions/checkout@v4
-                  with:
-                          repository: 'guysoft/CustomPiOS'
-                          path: CustomPiOS
-                - name: Checkout Project Repository
-                  uses: actions/checkout@v4
-                  with:
-                          path: repository
-                          submodules: true
+  build:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout CustomPiOS
+       uses: actions/checkout@v4
+       with:
+         repository: 'guysoft/CustomPiOS'
+         path: CustomPiOS
+
+     - name: Checkout Project Repository
+       uses: actions/checkout@v4
+       with:
+         path: repository
+         submodules: true
