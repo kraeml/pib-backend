@@ -36,6 +36,7 @@ jobs:
 
       - name: Build pipOS
         run: |
+          sudo modprobe loop
           cd repository/src
-          bash ./build_dist
+          sudo bash ./build_dist
     
