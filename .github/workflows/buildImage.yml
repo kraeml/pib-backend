@@ -6,14 +6,30 @@ jobs:
   build:
    runs-on: ubuntu-latest
    steps:
-     - name: Checkout CustomPiOS
-       uses: actions/checkout@v4
-       with:
-         repository: 'guysoft/CustomPiOS'
-         path: CustomPiOS
+      - name: Checkout CustomPiOS
+        uses: actions/checkout@v4
+        with:
+          repository: 'guysoft/CustomPiOS'
+          path: CustomPiOS
 
-     - name: Checkout Project Repository
-       uses: actions/checkout@v4
-       with:
-         path: repository
-         submodules: true
+      - name: Checkout Project Repository
+        uses: actions/checkout@v4
+        with:
+          path: repository
+          submodules: true
+      
+      - name: Update CustomPiOS Paths
+        run: |
+          cd repository/src
+          ../../CustomPiOS/src/update-custompios-paths
+
+      - name: Load raspianOS as base image
+        run: |
+          cd repository/src/images
+          wget --continue --quiet --trust-server-names 'https://downloads.raspberrypi.com/raspios_arm64/images/raspios_arm64-2024-11-19/2024-11-19-raspios-bookworm-arm64.img.xz'
+
+      - name: Build pipOS
+        run: |
+          cd repository/src
+          bash ./build_dist
+    

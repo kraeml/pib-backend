@@ -1,3 +1,13 @@
+# CustomPiOS
+*.xz
+src/workspace*
+build.log
+custompios_path
+.vagrant
+src/config.*
+*.swp
+tmp/
+
 # Visual Studio Code
 .vscode/
 # JetBrains
