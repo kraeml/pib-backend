@@ -1,1 +1,2 @@
 PIBBACKEND_VAR="This is a module variable"
+export BASE_ARCH="arm64"
