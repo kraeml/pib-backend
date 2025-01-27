@@ -6,6 +6,12 @@ jobs:
   build:
    runs-on: ubuntu-latest
    steps:
+      # Prepare Build
+      - name: Install Dependencies remove not needed directories
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes coreutils p7zip-full qemu-user-static pv time python3-git python3-yaml jq
+
       - name: Checkout CustomPiOS
         uses: actions/checkout@v4
         with:
