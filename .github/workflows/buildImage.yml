@@ -46,8 +46,8 @@ jobs:
           source repository/src/config
           IMAGE=pipOS-$(date +%y.%m.%d)
           sudo ls -l repository/src/workspace/
-          sudo mv repository/src/workspace/*.img.xz ${IMAGE}.img
-          echo "image=${IMAGE}.img.xz" >> $GITHUB_OUTPUT
+          sudo mv repository/src/workspace/*.img ${IMAGE}.img
+          echo "image=${IMAGE}.img" >> $GITHUB_OUTPUT
 
       - name: Uploading arm64 image as artifact
         uses: actions/upload-artifact@v4
