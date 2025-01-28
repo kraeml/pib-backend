@@ -20,5 +20,9 @@ unpack /filesystem/boot /boot
 echo "This is an example module, install and set up what you need here!"
 echo "$PIBBACKEND_VAR"
 
+cd /home/"${BASE_USER}"
+wget https://raw.githubusercontent.com/pib-rocks/pib-backend/main/setup/setup-pib.sh
+chown "${BASE_USER}": setup-pib.sh
+
 # Unpack root at the end, so files are modified before
 unpack /filesystem/root /

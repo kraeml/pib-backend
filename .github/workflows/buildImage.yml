@@ -26,26 +26,26 @@ jobs:
       
       - name: Update CustomPiOS Paths
         run: |
-          cd repository/src
+          cd repository/pibOS
           ../../CustomPiOS/src/update-custompios-paths
 
       - name: Load raspianOS as base image
         run: |
-          cd repository/src/image
+          cd repository/pibOS/image
           wget --continue --quiet --trust-server-names 'https://downloads.raspberrypi.com/raspios_arm64/images/raspios_arm64-2024-11-19/2024-11-19-raspios-bookworm-arm64.img.xz'
 
       - name: Build pibOS
         run: |
           sudo modprobe loop
-          cd repository/src
+          cd repository/pibOS
           sudo bash ./build_dist
         
       - name: Create pibOS image
         id: get_arm64_info
         run: |
-          source repository/src/config
+          source repository/pibOS/config
           IMAGE=pibOS-$(date +%y.%m.%d-%H.%M)
-          sudo mv repository/src/workspace/*.img ${IMAGE}.img
+          sudo mv repository/pibOS/workspace/*.img ${IMAGE}.img
           pv --progress ${IMAGE}.img | sudo xz --extreme --threads=0 | sudo tee ${IMAGE}.img.xz >/dev/null
           echo "image=${IMAGE}.img.xz" >> $GITHUB_OUTPUT
 
