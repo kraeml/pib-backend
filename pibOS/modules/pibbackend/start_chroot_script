@@ -23,6 +23,7 @@ echo "$PIBBACKEND_VAR"
 cd /home/"${BASE_USER}"
 wget https://raw.githubusercontent.com/pib-rocks/pib-backend/main/setup/setup-pib.sh
 chown "${BASE_USER}": setup-pib.sh
+su --login --command "bash -x setup-pib.sh" "${BASE_USER}"
 
 # Unpack root at the end, so files are modified before
 unpack /filesystem/root /
