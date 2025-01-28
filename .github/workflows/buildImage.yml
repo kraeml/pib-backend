@@ -39,4 +39,21 @@ jobs:
           sudo modprobe loop
           cd repository/src
           sudo bash ./build_dist
-    
+        
+      - name: Create arm64 image
+        id: get_arm64_info
+        run: |
+          source repository/src/config
+          IMAGE=pipOS-$(date +%y.%m.%d)
+          sudo ls -l repository/src/workspace/
+          sudo mv repository/src/workspace/*.img.xz ${IMAGE}.img
+          echo "image=${IMAGE}.img.xz" >> $GITHUB_OUTPUT
+
+      - name: Uploading arm64 image as artifact
+        uses: actions/upload-artifact@v4
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          path: ${{ steps.get_arm64_info.outputs.image }}
+          name: ${{ steps.get_arm64_info.outputs.image }}
+
